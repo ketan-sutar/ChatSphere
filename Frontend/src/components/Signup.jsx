@@ -1,9 +1,8 @@
-import { set } from "mongoose";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
-
 import axios from "axios";
+import toast from "react-hot-toast";
+import { BASE_URL } from "../config";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -13,35 +12,26 @@ const Signup = () => {
     confirmPassword: "",
     gender: "",
   });
-
   const navigate = useNavigate();
-
+  const handleCheckbox = (gender) => {
+    setUser({ ...user, gender });
+  };
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    // console.log(user);
     try {
-      const res = await axios.post(
-        `http://localhost:8000/api/v1/user/register`,
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-      // console.log(res)
+      const res = await axios.post(`${BASE_URL}/api/v1/user/register`, user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       if (res.data.success) {
-        toast.success(res.data.message);
-        // Redirect to login or home page
-        // useNavigate() can be used here if needed
         navigate("/login");
+        toast.success(res.data.message);
       }
     } catch (error) {
       toast.error(error.response.data.message);
-      console.error("Error during signup:", error);
-      // Handle error appropriately, e.g., show a notification
-      return;
+      console.log(error);
     }
     setUser({
       fullName: "",
@@ -51,10 +41,6 @@ const Signup = () => {
       gender: "",
     });
   };
-  const handleCheckbox = (gender) => {
-    setUser({ ...user, gender });
-  };
-
   return (
     <div className="min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
