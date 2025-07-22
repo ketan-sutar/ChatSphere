@@ -13,9 +13,11 @@ const Signup = () => {
     gender: "",
   });
   const navigate = useNavigate();
+
   const handleCheckbox = (gender) => {
     setUser({ ...user, gender });
   };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -30,9 +32,10 @@ const Signup = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Signup failed");
       console.log(error);
     }
+
     setUser({
       fullName: "",
       username: "",
@@ -41,90 +44,92 @@ const Signup = () => {
       gender: "",
     });
   };
+
   return (
-    <div className="min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
-        <h1 className="text-3xl font-bold text-center">Signup</h1>
-        <form onSubmit={onSubmitHandler} action="">
+    <div className="min-h-auto min-w-auto flex items-center justify-center bg-gray-900 text-white">
+      <div className="w-full max-w-md p-6 rounded-lg shadow-md bg-gray-800 border border-gray-700">
+        <h1 className="text-3xl font-bold text-center mb-6">Signup</h1>
+        <form onSubmit={onSubmitHandler}>
           <div>
-            <label className="label p-2">
-              <span className="text-base label-text">Full Name</span>
-            </label>
+            <label className="block mb-1">Full Name</label>
             <input
               value={user.fullName}
               onChange={(e) => setUser({ ...user, fullName: e.target.value })}
-              className="w-full input input-bordered h-10"
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               placeholder="Full Name"
             />
           </div>
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text">Username</span>
-            </label>
+
+          <div className="mt-4">
+            <label className="block mb-1">Username</label>
             <input
               value={user.username}
               onChange={(e) => setUser({ ...user, username: e.target.value })}
-              className="w-full input input-bordered h-10"
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               placeholder="Username"
             />
           </div>
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text">Password</span>
-            </label>
+
+          <div className="mt-4">
+            <label className="block mb-1">Password</label>
             <input
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
-              className="w-full input input-bordered h-10"
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="password"
               placeholder="Password"
             />
           </div>
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text">Confirm Password</span>
-            </label>
+
+          <div className="mt-4">
+            <label className="block mb-1">Confirm Password</label>
             <input
               value={user.confirmPassword}
               onChange={(e) =>
                 setUser({ ...user, confirmPassword: e.target.value })
               }
-              className="w-full input input-bordered h-10"
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="password"
               placeholder="Confirm Password"
             />
           </div>
-          <div className="flex items-center my-4">
-            <div className="flex items-center">
-              <p>Male</p>
+
+          <div className="flex items-center gap-4 my-4">
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={user.gender === "male"}
                 onChange={() => handleCheckbox("male")}
-                className="checkbox mx-2"
+                className="accent-blue-600"
               />
-            </div>
-            <div className="flex items-center">
-              <p>Female</p>
+              <span>Male</span>
+            </label>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={user.gender === "female"}
                 onChange={() => handleCheckbox("female")}
-                className="checkbox mx-2"
+                className="accent-pink-500"
               />
-            </div>
+              <span>Female</span>
+            </label>
           </div>
-          <p className="text-center my-2">
-            Already have an account? <Link to="/login"> login </Link>
+
+          <p className="text-center my-3 text-sm text-gray-300">
+            Already have an account?{" "}
+            <Link className="text-blue-400 hover:underline" to="/login">
+              Login
+            </Link>
           </p>
+
           <div>
             <button
               type="submit"
-              className="btn btn-block btn-sm mt-2 border border-slate-700"
+              className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded shadow-md"
             >
-              Singup
+              Signup
             </button>
           </div>
         </form>

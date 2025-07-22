@@ -11,6 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 let persistor = persistStore(store);
 
 export const BASED_URL="http://localhost:8000"
+// export const BASED_URL = "https://chat-sphere-backend-lake.vercel.app";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -39,6 +39,8 @@ export const register = async (req, res) => {
     console.log(error);
   }
 };
+
+
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -72,7 +74,8 @@ export const login = async (req, res) => {
       .cookie("token", token, {
         maxAge: 1 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "strict",
+        secure: true, // Set to true if using HTTPS
+        sameSite: "none",
       })
       .json({
         _id: user._id,
