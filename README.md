@@ -41,5 +41,8 @@ JWT (JSON Web Token) Authentication – keeps users securely logged in by verify
 
 📦 Messages and user data stored in MongoDB
 
+output-
+<img width="1920" height="1080" alt="Screenshot 2025-07-22 151248" src="https://github.com/user-attachments/assets/c734e755-434b-4ff8-8d0c-f08b39f3ec94" />
 
 
+<img width="1920" height="1080" alt="Screenshot 2025-07-22 151216" src="https://github.com/user-attachments/assets/7b4d76db-3838-4544-bab7-f5622c7240ec" />
